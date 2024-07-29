@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:machinetest_web/controller/authcontroller.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/strings.dart';
+import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
 
-class LoginWeb extends StatelessWidget {
+class LoginWeb extends GetWidget<AuthController> {
   LoginWeb({super.key});
-
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
@@ -34,6 +37,7 @@ class LoginWeb extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         const Spacer(
@@ -47,16 +51,47 @@ class LoginWeb extends StatelessWidget {
                         ),
                         const Spacer(),
                         MyTextField(
-                            text: 'Email', textEditingController: email),
+                          validator: (value) {
+                            return Validators.emailValidator(value);
+                          },
+                          text: 'Email',
+                          textEditingController: email,
+                        ),
                         const Spacer(),
                         MyTextField(
-                            text: 'Password', textEditingController: password),
+                          validator: (value) {
+                            return Validators.passValidator(value);
+                          },
+                          text: 'Password',
+                          textEditingController: password,
+                        ),
                         const Spacer(
                           flex: 2,
                         ),
                         MyButton(
                           text: 'Login',
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              controller.logIn(
+                                  email.text.trim(), password.text.trim());
+                            }
+                          },
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Get.offAll(() => SignUpPage());
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Don't have an account? "),
+                              Text(
+                                "Sign Up",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                         const Spacer(
                           flex: 3,

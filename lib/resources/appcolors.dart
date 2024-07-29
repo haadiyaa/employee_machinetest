@@ -6,6 +6,7 @@ class AppColors {
   static Color white=const Color.fromARGB(255, 255, 252, 249);
   static Color black=Colors.black;
   static Color grey=Colors.grey;
+  static Color red=Colors.red;
   static Color shadowColor=const Color.fromARGB(255, 199, 199, 199);
   //FAE150
 }

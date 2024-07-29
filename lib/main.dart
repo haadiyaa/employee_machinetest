@@ -1,8 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:machinetest_web/controller/authcontroller.dart';
+import 'package:machinetest_web/firebase_options.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
-import 'package:machinetest_web/view/login/login.dart';
+import 'package:machinetest_web/resources/instancebinding.dart';
+import 'package:machinetest_web/view/splachscreen/splashscreen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
@@ -11,13 +19,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding: InstanceBinding(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.bgColor,
         fontFamily: 'Poppins',
       ),
-      home: const Login()
+      home: const SplashScreen(),
     );
   }
 }
