@@ -5,15 +5,17 @@ import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
+import 'package:machinetest_web/view/login/login.dart';
 import 'package:machinetest_web/view/signup/signup.dart';
 
 import '../../controller/authcontroller.dart';
 
-class LoginTab extends GetWidget<AuthController> {
-  LoginTab({super.key});
+class SignUpTab extends GetWidget<AuthController> {
+  SignUpTab({super.key});
   final _formKey = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+  final TextEditingController name = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -46,7 +48,7 @@ class LoginTab extends GetWidget<AuthController> {
                           // Image(image: AssetImage(Strings.logo)),
                           const Spacer(),
                           const Text(
-                            'Login',
+                            'Sign Up',
                             style: MyTextStyles.boldtext20,
                           ),
                           const Spacer(),
@@ -63,7 +65,7 @@ class LoginTab extends GetWidget<AuthController> {
                               return Validators.nameValidator(value);
                             },
                             text: 'Name',
-                            textEditingController: email,
+                            textEditingController: name,
                           ),
                           const Spacer(),
                           MyTextField(
@@ -77,25 +79,28 @@ class LoginTab extends GetWidget<AuthController> {
                             flex: 2,
                           ),
                           MyButton(
-                            text: 'Login',
+                            text: 'Signup',
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                controller.logIn(
-                                    email.text.trim(), password.text.trim());
+                                controller.createUser(
+                                  name.text.trim(),
+                                  email.text.trim(),
+                                  password.text.trim(),
+                                );
                               }
                             },
                           ),
                           Spacer(),
                           GestureDetector(
                             onTap: () {
-                              Get.offAll(() => SignUp());
+                              Get.offAll(() => Login());
                             },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Don't have an account? "),
+                                Text("Already have an account? "),
                                 Text(
-                                  "Sign Up",
+                                  "Login",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ],

@@ -24,8 +24,7 @@ class AuthController extends GetxController {
     });
   }
 
-  void createUser(String name, String email, String password, String phone,
-      String age) async {
+  void createUser(String name, String email, String password) async {
     try {
       loading.value = true;
       CollectionReference reference =
@@ -37,7 +36,7 @@ class AuthController extends GetxController {
         'name': name,
         'email': email,
       });
-      // Get.offAll(() => LoginPage());
+      Get.offAll(() => Login());
 
       loading.value = false;
     } catch (e) {

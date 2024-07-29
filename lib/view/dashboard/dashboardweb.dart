@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:machinetest_web/controller/authcontroller.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/strings.dart';
 import 'package:machinetest_web/utils/mybox.dart';
 
-class DashboardWeb extends StatelessWidget {
+class DashboardWeb extends GetWidget<AuthController> {
   const DashboardWeb({super.key});
 
   @override
@@ -27,7 +29,7 @@ class DashboardWeb extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 backgroundColor: AppColors.white,
-                child: const Column(
+                child: Column(
                   children: [
                     DrawerHeader(
                       child: Image(
@@ -48,6 +50,9 @@ class DashboardWeb extends StatelessWidget {
                       title: Text('All Employees'),
                     ),
                     ListTile(
+                      onTap: () {
+                        controller.signOut();
+                      },
                       leading: Icon(Icons.logout),
                       title: Text('Logout'),
                     ),

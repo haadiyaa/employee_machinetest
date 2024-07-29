@@ -6,6 +6,7 @@ import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
+import 'package:machinetest_web/view/signup/signup.dart';
 
 class LoginMobile extends GetWidget<AuthController> {
   LoginMobile({super.key});
@@ -74,6 +75,22 @@ class LoginMobile extends GetWidget<AuthController> {
                                     email.text.trim(), password.text.trim());
                               }
                             },
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              Get.offAll(() => SignUp());
+                            },
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Don't have an account? "),
+                                Text(
+                                  "Sign Up",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                           const Spacer(
                             flex: 3,
