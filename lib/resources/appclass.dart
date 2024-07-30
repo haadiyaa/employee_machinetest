@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:machinetest_web/utils/employeelist.dart';
 import 'package:machinetest_web/utils/mycalendar.dart';
+import 'package:machinetest_web/view/dashboard/dashboardweb.dart';
 
 class AppClass {
-  static const List<Widget> items=[
+  static List<Widget> items = [
     EmployeeList(),
-    MyCalendar(),
-    // MyCalendar(),
+    AddEmployee(),
     MyCalendar(),
     MyCalendar(),
   ];
-  static const List<Widget> itemsWeb=[
+  static List<Widget> itemsMobile = [
+    EmployeeList(),
+    AddEmployee(),
+    MyCalendar(),
+  ];
+  static const List<Widget> itemsWeb = [
     EmployeeList(),
     MyCalendar(),
   ];

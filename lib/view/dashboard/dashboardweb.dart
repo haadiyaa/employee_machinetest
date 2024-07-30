@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:machinetest_web/controller/authcontroller.dart';
-import 'package:machinetest_web/resources/appclass.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
-import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/strings.dart';
-import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybox.dart';
-import 'package:machinetest_web/utils/mybutton.dart';
-import 'package:machinetest_web/utils/mytextfield.dart';
+import 'package:machinetest_web/utils/myshowdialog.dart';
 
 class DashboardWeb extends GetWidget<AuthController> {
   const DashboardWeb({super.key});
@@ -100,43 +96,18 @@ class DashboardWeb extends GetWidget<AuthController> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
             //right side
-            Expanded(
+            const Expanded(
               child: Column(
                 children: [
                   AspectRatio(
                     aspectRatio: 16 / 9,
-                    child: GestureDetector(
-                      onTap: () {
-                        myDialog(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person_add_alt_1_sharp),
-                            Text(
-                              'Add Employee',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w200,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    child: AddEmployee(),
                   ),
                 ],
               ),
@@ -147,6 +118,42 @@ class DashboardWeb extends GetWidget<AuthController> {
     );
   }
 
+}
+
+class AddEmployee extends StatelessWidget {
+  const AddEmployee({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        myDialog(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.person_add_alt_1_sharp),
+            Text(
+              'Add Employee',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   myDialog(BuildContext context) {
     final nameController = TextEditingController();
     final salaryController = TextEditingController();
@@ -155,68 +162,11 @@ class DashboardWeb extends GetWidget<AuthController> {
     final _formKey = GlobalKey<FormState>();
     return showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: AppColors.white,
-        title: Row(
-          children: [
-            const Expanded(
-              flex: 9,
-              child: Text("Add Employee", style: MyTextStyles.boldtext),
-            ),
-            IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(Icons.close))
-          ],
-        ),
-        content: Container(
-          width: AppClass.getMqWidth(context) * 0.6,
-          height: AppClass.getMqHeight(context) * 0.5,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                MyTextField(
-                  text: 'Name of the Employee',
-                  textEditingController: nameController,
-                  validator: (value) {
-                    return Validators.nameValidator(value);
-                  },
-                ),
-                MyTextField(
-                  text: 'Age of the Employee',
-                  textEditingController: ageController,
-                  validator: (value) {
-                    return Validators.ageValidator(value);
-                  },
-                ),
-                MyTextField(
-                  text: 'Salary of the Employee',
-                  textEditingController: salaryController,
-                  validator: (value) {
-                    return Validators.salaryValidator(value);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                Get.back();
-              }
-               
-            },
-            child: const Text('Okay'),
-          ),
-        ],
+      builder: (_) => DialogAlert(
+        formKey: _formKey,
+        nameController: nameController,
+        ageController: ageController,
+        salaryController: salaryController,
       ),
     );
   }

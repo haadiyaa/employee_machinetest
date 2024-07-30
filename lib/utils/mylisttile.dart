@@ -15,7 +15,7 @@ class MyListTile extends StatelessWidget {
           color: AppColors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: AppClass.items[index],
+        child: AppClass.itemsMobile[index],
       ),
     );
   }

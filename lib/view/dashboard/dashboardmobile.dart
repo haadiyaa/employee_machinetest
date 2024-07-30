@@ -60,17 +60,8 @@ class DashBoardMobile extends GetWidget<AuthController> {
               aspectRatio: 1,
               child: SizedBox(
                 width: double.infinity,
-                // child: GridView.builder(
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //   ),
-                //   itemCount: 4,
-                //   itemBuilder: (BuildContext context, int index) {
-                //     return MyBox(index: index,);
-                //   },
-                // ),
                 child: ListView.builder(
-                  itemCount: 4,
+                  itemCount: 3,
                   itemBuilder: (BuildContext context, int index) {
                     return MyListTile(index: index);
                   },

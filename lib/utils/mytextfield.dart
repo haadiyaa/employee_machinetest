@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 
 class MyTextField extends StatelessWidget {
-  MyTextField({
+  const MyTextField({
     super.key,
     required this.text,
     required this.textEditingController,
     this.validator,
     this.obscureText = false,
+    this.enabled = true,
   });
   final String text;
   final TextEditingController textEditingController;
   final String? Function(String?)? validator;
   final bool obscureText;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        enabled: enabled,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validator,
         obscureText: obscureText,
@@ -27,7 +30,7 @@ class MyTextField extends StatelessWidget {
           suffixIcon: obscureText
               ? IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                       // ? Icons.visibility
                       Icons.visibility_off),
                 )

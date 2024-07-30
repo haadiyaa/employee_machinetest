@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/secrets.dart';
@@ -17,7 +18,51 @@ class ApiProviders {
     return null;
   }
 
-  // static Future<void> createEmployee(String name,String age,String salary)async{
-  //   var response=await http.post(Uri.parse('${Secrets.baseUrl}${Secrets.createEmployee}'));
-  // }
+  static Future<String?> createEmployee(
+      String name, String age, String salary) async {
+    var response = await http.post(
+      Uri.parse('${Secrets.baseUrl}${Secrets.createEmployee}'),
+      body: {
+        "name": name,
+        "salary": salary,
+        "age": age,
+      },
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      return '';
+    } else {
+      print('Error creating employee');
+    }
+    return null;
+  }
+
+  static Future<http.Response?> deleteEmployee(String id)async{
+    var response= await http.delete(Uri.parse('${Secrets.baseUrl}${Secrets.deleteEmployee}$id'));
+    print(response.statusCode);
+    if (response.statusCode==200) {
+      print(response.body);
+      return response;
+      // Get.snackbar('Deletion Successful!', 'Employee deleted Id; $id');
+    } else {
+      print('null');
+      return null;
+      // Get.snackbar('Error deleting employee details', 'Plase try again');
+    }
+  }
+  static Future<http.Response?> updateEmployee(String id, String name, String age, String salary)async{
+    var response=await http.put(Uri.parse('${Secrets.baseUrl}${Secrets.updateEmployee}$id'),
+    body: {
+      "name":name,
+      "age":age,
+      "salary":salary,
+    });
+    if (response.statusCode==200) {
+      return response;
+    } else {
+      print('null ${response.statusCode}');
+      return null;
+      
+    }
+  }
 }
