@@ -32,4 +32,23 @@ class Validators {
     }
     return null;
   }
+//\d+(?:,\d{3})*(?:\.\d{1,2})?
+  static String? ageValidator(String? value) {
+    final age = RegExp(r'^[0-9]{1,2}$');
+    if (value!.isEmpty) {
+      return 'please enter the age';
+    } else if (!age.hasMatch(value)) {
+      return 'Please enter a valid age';
+    }
+    return null;
+  }
+  static String? salaryValidator(String? value) {
+    final age = RegExp(r'^\d+(?:,\d{3})*(?:\.\d{1,2})?$');
+    if (value!.isEmpty) {
+      return 'please enter the salary';
+    } else if (!age.hasMatch(value)) {
+      return 'Please enter a valid salary';
+    }
+    return null;
+  }
 }

@@ -14,4 +14,12 @@ class AppClass {
     EmployeeList(),
     MyCalendar(),
   ];
+
+  static getMqWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
+
+  static getMqHeight(BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
 }

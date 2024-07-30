@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:machinetest_web/controller/authcontroller.dart';
+import 'package:machinetest_web/resources/appclass.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
+import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/strings.dart';
+import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybox.dart';
+import 'package:machinetest_web/utils/mybutton.dart';
+import 'package:machinetest_web/utils/mytextfield.dart';
 
 class DashboardWeb extends GetWidget<AuthController> {
   const DashboardWeb({super.key});
@@ -31,7 +36,7 @@ class DashboardWeb extends GetWidget<AuthController> {
                 backgroundColor: AppColors.white,
                 child: Column(
                   children: [
-                    DrawerHeader(
+                    const DrawerHeader(
                       child: Image(
                         image: AssetImage(Strings.logo),
                         width: 200,
@@ -41,11 +46,11 @@ class DashboardWeb extends GetWidget<AuthController> {
                       //   size: 50,
                       // ),
                     ),
-                    ListTile(
+                    const ListTile(
                       leading: Icon(Icons.category_outlined),
                       title: Text('Dashboard'),
                     ),
-                    ListTile(
+                    const ListTile(
                       leading: Icon(Icons.group),
                       title: Text('All Employees'),
                     ),
@@ -53,8 +58,8 @@ class DashboardWeb extends GetWidget<AuthController> {
                       onTap: () {
                         controller.signOut();
                       },
-                      leading: Icon(Icons.logout),
-                      title: Text('Logout'),
+                      leading: const Icon(Icons.logout),
+                      title: const Text('Logout'),
                     ),
                   ],
                 ),
@@ -90,8 +95,9 @@ class DashboardWeb extends GetWidget<AuthController> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                     )
@@ -103,11 +109,32 @@ class DashboardWeb extends GetWidget<AuthController> {
             Expanded(
               child: Column(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(10),
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: GestureDetector(
+                      onTap: () {
+                        myDialog(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.person_add_alt_1_sharp),
+                            Text(
+                              'Add Employee',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -116,6 +143,80 @@ class DashboardWeb extends GetWidget<AuthController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  myDialog(BuildContext context) {
+    final nameController = TextEditingController();
+    final salaryController = TextEditingController();
+    final ageController = TextEditingController();
+
+    final _formKey = GlobalKey<FormState>();
+    return showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: AppColors.white,
+        title: Row(
+          children: [
+            const Expanded(
+              flex: 9,
+              child: Text("Add Employee", style: MyTextStyles.boldtext),
+            ),
+            IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.close))
+          ],
+        ),
+        content: Container(
+          width: AppClass.getMqWidth(context) * 0.6,
+          height: AppClass.getMqHeight(context) * 0.5,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                MyTextField(
+                  text: 'Name of the Employee',
+                  textEditingController: nameController,
+                  validator: (value) {
+                    return Validators.nameValidator(value);
+                  },
+                ),
+                MyTextField(
+                  text: 'Age of the Employee',
+                  textEditingController: ageController,
+                  validator: (value) {
+                    return Validators.ageValidator(value);
+                  },
+                ),
+                MyTextField(
+                  text: 'Salary of the Employee',
+                  textEditingController: salaryController,
+                  validator: (value) {
+                    return Validators.salaryValidator(value);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                Get.back();
+              }
+               
+            },
+            child: const Text('Okay'),
+          ),
+        ],
       ),
     );
   }

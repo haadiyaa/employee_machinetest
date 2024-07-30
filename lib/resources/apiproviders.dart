@@ -16,4 +16,8 @@ class ApiProviders {
     }
     return null;
   }
+
+  // static Future<void> createEmployee(String name,String age,String salary)async{
+  //   var response=await http.post(Uri.parse('${Secrets.baseUrl}${Secrets.createEmployee}'));
+  // }
 }

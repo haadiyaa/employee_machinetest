@@ -12,10 +12,10 @@ class EmployeeList extends GetWidget<EmployeeController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 300,
       child: Obx(
         () {
-          return controller.isLoading.value
+          return controller.isLoading.value||controller.employeeModel==null
               ? Expanded(
                   child: ListView.builder(
                     itemCount: 10,
