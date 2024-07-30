@@ -9,10 +9,12 @@ class MyCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TableCalendar(
-      focusedDay: DateTime.now(),
-      firstDay: DateTime.utc(2010, 3, 14),
-      lastDay: DateTime.utc(2050, 12, 30),
+    return SingleChildScrollView(
+      child: TableCalendar(
+        focusedDay: DateTime.now(),
+        firstDay: DateTime.utc(2010, 3, 14),
+        lastDay: DateTime.utc(2050, 12, 30),
+      ),
     );
   }
 }

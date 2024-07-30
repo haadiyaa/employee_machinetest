@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:machinetest_web/controller/employeecontroller.dart';
+import 'package:machinetest_web/resources/appcolors.dart';
+import 'package:shimmer/shimmer.dart';
 
 class EmployeeList extends GetWidget<EmployeeController> {
   const EmployeeList({
@@ -18,9 +20,13 @@ class EmployeeList extends GetWidget<EmployeeController> {
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return const ListTile(
-                        title: Text(
-                            'controller.employeeModel.value!.data![index].employeeName!'),
+                      return Shimmer.fromColors(
+                        baseColor: AppColors.bgColor,
+                        highlightColor: AppColors.white,
+                        child: const ListTile(
+                          title: Text(
+                              'controller.employeeModel.value!.data![index].employeeName!'),
+                        ),
                       );
                     },
                   ),
@@ -30,6 +36,9 @@ class EmployeeList extends GetWidget<EmployeeController> {
                     itemCount: controller.employeeModel.value!.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
+                        onTap: () {
+                          
+                        },
                         title: Text(controller
                             .employeeModel.value!.data![index].employeeName!),
                       );

@@ -5,6 +5,7 @@ import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/strings.dart';
 import 'package:machinetest_web/utils/mybox.dart';
+import 'package:machinetest_web/utils/myboxtab.dart';
 
 class DashBoardTab extends GetWidget<AuthController> {
   const DashBoardTab({super.key});
@@ -14,8 +15,8 @@ class DashBoardTab extends GetWidget<AuthController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
-        title: const Text(
-          'Dashboard',
+        title: Text(
+          'Dashboard ${MediaQuery.of(context).size.width}',
           style: MyTextStyles.boldtext,
         ),
       ),
@@ -66,7 +67,7 @@ class DashBoardTab extends GetWidget<AuthController> {
                     ),
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
-                      // return MyBox(index: index,);
+                      return MyBoxTab(index: index,);
                     },
                   ),
                 ),
