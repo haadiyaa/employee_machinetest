@@ -3,24 +3,31 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:machinetest_web/model/employeemodel.dart';
+import 'package:machinetest_web/resources/apiproviders.dart';
 import 'package:machinetest_web/resources/secrets.dart';
 
 class EmployeeController extends GetxController {
-  var employeeModel=<Data>[].obs;
-  
-  void fetchAllEmployees()async{
+  Rx<EmployeeModel?> employeeModel =(null as EmployeeModel?).obs;
+  var isLoading = false.obs;
+  @override
+  void onInit() {
+    fetchAllEmployees();
+    super.onInit();
+  }
+
+  void fetchAllEmployees() async {
+    isLoading.value=true;
     try {
-      final response=await http.get(Uri.parse('${Secrets.baseUrl}${Secrets.allEmployeesUrl}'));
-      final data=jsonDecode(response.body);
-      if (response.statusCode==200) {
-        // employeeModel.value=Data.fromJson(data);
-        print(employeeModel.value);
-      } else {
-        print(employeeModel.value);
-        print('error');
+      var emoloyees = await ApiProviders.fetchEmployees();
+      if (emoloyees != null) {
+        employeeModel.value=emoloyees;
+        print(employeeModel);
       }
     } catch (e) {
       print(e.toString());
+    }
+    finally{
+      isLoading.value=false;
     }
   }
 }

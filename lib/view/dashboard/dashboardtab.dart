@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:machinetest_web/controller/authcontroller.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/mytextstyles.dart';
 import 'package:machinetest_web/resources/strings.dart';
 import 'package:machinetest_web/utils/mybox.dart';
 
-class DashBoardTab extends StatelessWidget {
+class DashBoardTab extends GetWidget<AuthController> {
   const DashBoardTab({super.key});
 
   @override
@@ -17,11 +19,11 @@ class DashBoardTab extends StatelessWidget {
           style: MyTextStyles.boldtext,
         ),
       ),
-      drawer: const Drawer(
+      drawer:  Drawer(
         backgroundColor: AppColors.bgColor,
         child: Column(
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               child: Image(
                 image: AssetImage(Strings.logo),
                 width: 200,
@@ -31,17 +33,20 @@ class DashBoardTab extends StatelessWidget {
               //   size: 50,
               // ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.category_outlined),
               title: Text('Dashboard'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.group),
               title: Text('Employees'),
             ),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              onTap: () {
+                controller.signOut();
+              },
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
             ),
           ],
         ),
@@ -61,7 +66,7 @@ class DashBoardTab extends StatelessWidget {
                     ),
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
-                      return MyBox(index: index,);
+                      // return MyBox(index: index,);
                     },
                   ),
                 ),
