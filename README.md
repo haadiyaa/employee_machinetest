@@ -31,6 +31,18 @@ If you are using your own Firebase project:
 
 Replace the placeholder values in lib/firebase_options.dart with your Firebase project credentials.  
 
+I have used firebase for user authentication and GetX state management system in this project.  
+The depenedencies which I have used are:  
+
+ - cupertino_icons: ^1.0.8  
+ - table_calendar: ^3.1.2  
+ - get: ^4.6.6
+ - http: ^1.2.2  
+ - firebase_core: ^2.24.2  
+ - firebase_auth: ^4.16.0  
+ - cloud_firestore: ^4.14.0  
+ - shimmer: ^3.0.0
+
 ## Functionality
 The application provides the following functionalities for managing employee data:  
 
