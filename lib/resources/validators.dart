@@ -32,7 +32,7 @@ class Validators {
     }
     return null;
   }
-//\d+(?:,\d{3})*(?:\.\d{1,2})?
+
   static String? ageValidator(String? value) {
     final age = RegExp(r'^[0-9]{1,2}$');
     if (value!.isEmpty) {

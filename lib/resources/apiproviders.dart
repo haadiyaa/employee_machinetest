@@ -6,6 +6,8 @@ import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/secrets.dart';
 
 class ApiProviders {
+
+  /// fetch all employee api call
   static Future<EmployeeModel?> fetchEmployees() async {
     var response = await http
         .get(Uri.parse('${Secrets.baseUrl}${Secrets.allEmployeesUrl}'));
@@ -18,6 +20,7 @@ class ApiProviders {
     }
   }
 
+/// create employee api call
   static Future<http.Response?> createEmployee(
       String name, String age, String salary) async {
     var response = await http.post(
@@ -37,6 +40,7 @@ class ApiProviders {
     }
   }
 
+/// delete an employee api call
   static Future<http.Response?> deleteEmployee(String id) async {
     var response = await http
         .delete(Uri.parse('${Secrets.baseUrl}${Secrets.deleteEmployee}$id'));
@@ -50,6 +54,7 @@ class ApiProviders {
     }
   }
 
+/// update an existing employee details
   static Future<http.Response?> updateEmployee(
       String id, String name, String age, String salary) async {
     var response = await http.put(

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/apiproviders.dart';
 
 class EmployeeController extends GetxController {
   Rx<EmployeeModel?> employeeModel = (null as EmployeeModel?).obs;
   var isLoading = false.obs;
+
+  /// fetching all employee details on initialization
   @override
   void onInit() {
     fetchAllEmployees();
     super.onInit();
   }
 
+///Fetching the employee details
   void fetchAllEmployees() async {
     isLoading.value = true;
     try {
@@ -60,6 +62,7 @@ class EmployeeController extends GetxController {
     }
   }
 
+///Adding the employee details to using api
   Future<void> createEmployee(String name, String age, String salary) async {
     isLoading.value = true;
     try {
@@ -111,6 +114,7 @@ class EmployeeController extends GetxController {
     }
   }
 
+///deleting the employee details using delete endpoint
   Future<void> delete(String id) async {
     isLoading.value = true;
     print('object');
@@ -164,6 +168,7 @@ class EmployeeController extends GetxController {
     }
   }
 
+/// updating the employee details 
   Future<void> updateEmp(
       String id, String name, String age, String salary) async {
     isLoading.value = true;

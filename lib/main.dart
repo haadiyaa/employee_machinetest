@@ -10,7 +10,10 @@ import 'package:machinetest_web/view/splachscreen/splashscreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  /// firebase initialization
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  /// dependency injuction
   Get.put(AuthController());
   Get.put(EmployeeController());
   runApp(const MyApp());

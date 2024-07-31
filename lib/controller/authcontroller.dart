@@ -10,11 +10,10 @@ class AuthController extends GetxController {
   User? get user => _firebaseUser.value;
   late UserCredential userCredential;
 
-  var userDetails = <Map<String, dynamic>>[].obs;
-
   var loading = false.obs;
   var isLoading = false.obs;
 
+/// Checking the login status of the user on initialization
   @override
   void onInit() {
     super.onInit();
@@ -24,6 +23,7 @@ class AuthController extends GetxController {
     });
   }
 
+/// Registering  the user in firbase authentication and firestore datebase
   void createUser(String name, String email, String password) async {
     try {
       loading.value = true;
@@ -45,6 +45,7 @@ class AuthController extends GetxController {
     }
   }
 
+///Login functionality for registered users
   void logIn(String email, String password) async {
     try {
       userCredential = await _auth.signInWithEmailAndPassword(
@@ -55,54 +56,10 @@ class AuthController extends GetxController {
     }
   }
 
+///logout funtion 
   Future<void> signOut() async {
-    await _auth.signOut().then((value) => Get.offAll(() => const Login()));
-  }
-
-  void sendpasswordResetemail(String email) async {
-    try {
-      await _auth
-          .sendPasswordResetEmail(email: email);
-          // .then((value) => Get.offAll(() => LoginPage()));
-      Get.snackbar("Password reset email has been sent", "success");
-    } catch (e) {
-      Get.snackbar("Error sending email", e.toString());
-    }
-  }
-
-  void deleteAccount(String email, String pass) async {
-    User? user = await _auth.currentUser;
-    AuthCredential credential =
-        EmailAuthProvider.credential(email: email, password: pass);
-    try {
-      await user!.reauthenticateWithCredential(credential).then((value) {
-        value.user!.delete().then((value) {
-          // Get.offAll(() => LoginPage());
-          Get.snackbar("Account deleted", "success");
-        });
-      });
-    } catch (e) {
-      Get.snackbar("Error deleting account!", e.toString());
-    }
-  }
-
-  Future<void> saveUserDataToFirestore(User user) async {
-    try {
-      CollectionReference userCollection =
-          FirebaseFirestore.instance.collection('Users');
-
-      DocumentSnapshot docSnapshot = await userCollection.doc(user.uid).get();
-
-      if (!docSnapshot.exists) {
-        await userCollection.doc(user.uid).set({
-          'name': user.displayName,
-          'email': user.email,
-          
-        });
-      }
-    } catch (e) {
-      print('Error saving user data to Firestore: $e');
-      throw e;
-    }
+    await _auth.signOut().then((value) => Get.offAll(() => const Login())).then((value) {
+      Get.snackbar('Logged Out!', 'Successful');
+    },);
   }
 }

@@ -11,7 +11,7 @@ class ResponsiveLayout extends StatelessWidget {
   final Widget mobileView;
   final Widget tabletView;
   final Widget desktopView;
-
+/// responsive layout widget used for responsiveness
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(

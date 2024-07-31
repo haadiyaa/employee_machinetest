@@ -1,4 +1,4 @@
-
+///the employee model of all employees
 class EmployeeModel {
     String? status;
     List<Data>? data;
