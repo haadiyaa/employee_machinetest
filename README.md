@@ -11,17 +11,13 @@ A few resources to get you started if this is your first Flutter project:
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 ## Setup Instructions
 
 ### Clone the Repository:
 Clone the provided source code repository using the following command:
 
-git clone https://github.com/haadiyaa/employee_machinetest.git
-Use code with caution.
+ - git clone https://github.com/haadiyaa/employee_machinetest.git  
+Use code with caution.  
 
 Install Dependencies:  
 Navigate to the project directory and run the following command to install dependencies:  
@@ -40,14 +36,16 @@ The application provides the following functionalities for managing employee dat
 
 ### User Authentication:  
 
-Sign up with email and password.  
-Log in with existing credentials.  
-Log out from the application.  
+ - Sign up with email and password.  
+ - Log in with existing credentials.  
+ - Log out from the application.  
 
 ### Employee Management:  
 
-Fetch and display a list of all employees.  
-View detailed information for a single employee.  
-Create new employee records.  
-Update existing employee records.  
-Delete employee records.  
+ - Fetch and display a list of all employees.  
+ - View details of a single employee.  
+ - Create new employee records.  
+ - Update existing employee records.  
+ - Delete employee records.  
+
+ This documentation provides a basic overview of the Employee Management Dashboard application. Feel free to explore the source code for a deeper understanding of the implementation details.      
