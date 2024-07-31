@@ -21,7 +21,6 @@ class EmployeeController extends GetxController {
       var emoloyees = await ApiProviders.fetchEmployees();
       if (emoloyees != null) {
         employeeModel.value = emoloyees;
-        print(employeeModel);
       } else {
         Get.dialog(
           AlertDialog(
@@ -40,7 +39,6 @@ class EmployeeController extends GetxController {
         );
       }
     } catch (e) {
-      print(e.toString());
       Get.dialog(
         AlertDialog(
           content: const Text('Error fetching employee details'),
@@ -107,7 +105,6 @@ class EmployeeController extends GetxController {
           ],
         ),
       );
-      print(e.toString());
       Get.snackbar("Error adding employee", e.toString());
     } finally {
       isLoading.value = false;
@@ -117,19 +114,16 @@ class EmployeeController extends GetxController {
 ///deleting the employee details using delete endpoint
   Future<void> delete(String id) async {
     isLoading.value = true;
-    print('object');
     try {
       final del = await ApiProviders.deleteEmployee(id);
       if (del != null) {
-        print('object1');
         Get.snackbar('Deletion Successful!', 'Employee deleted');
         Get.back(closeOverlays: true);
       } else {
-        print('object3');
         Get.snackbar('Error deleting employee details', 'Plase try again');
         Get.dialog(
           AlertDialog(
-            content: Text('Error Deleting employee details'),
+            content: const Text('Error Deleting employee details'),
             actions: [
               ElevatedButton.icon(
                 onPressed: () async {
@@ -145,7 +139,6 @@ class EmployeeController extends GetxController {
         );
       }
     } catch (e) {
-      print('object4');
       Get.snackbar('Error deleting details!', e.toString());
       Get.dialog(
         AlertDialog(
@@ -172,15 +165,12 @@ class EmployeeController extends GetxController {
   Future<void> updateEmp(
       String id, String name, String age, String salary) async {
     isLoading.value = true;
-    print('object');
     try {
       final update = await ApiProviders.updateEmployee(id, name, age, salary);
       if (update != null) {
-        print('object1');
         Get.snackbar('Updation Successful!', 'Employee Updated Id; $id');
         Get.back(closeOverlays: true);
       } else {
-        print('object3');
         Get.dialog(
           AlertDialog(
             content: const Text('Error updating employee details'),
@@ -198,7 +188,6 @@ class EmployeeController extends GetxController {
         Get.snackbar('Error updating employee details', 'Plase try again');
       }
     } catch (e) {
-      print('object4');
       Get.dialog(
         AlertDialog(
           content: const Text('Error updating employee details'),

@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:machinetest_web/controller/authcontroller.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/mytextstyles.dart';
-import 'package:machinetest_web/resources/strings.dart';
 import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
 import 'package:machinetest_web/view/login/login.dart';
-import 'package:machinetest_web/view/signup/signup.dart';
 
 class SignUpWeb extends GetWidget<AuthController> {
   SignUpWeb({super.key});
@@ -91,10 +89,10 @@ class SignUpWeb extends GetWidget<AuthController> {
                             }
                           },
                         ),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Get.offAll(() => Login());
+                            Get.offAll(() => const Login());
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,

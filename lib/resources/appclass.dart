@@ -5,15 +5,15 @@ import 'package:machinetest_web/view/dashboard/dashboardweb.dart';
 
 class AppClass {
   static List<Widget> items = [
-    EmployeeList(),
-    AddEmployee(),
-    MyCalendar(),
-    MyCalendar(),
+    const EmployeeList(),
+    const AddEmployee(),
+    const MyCalendar(),
+    const MyCalendar(),
   ];
   static List<Widget> itemsMobile = [
-    EmployeeList(),
-    AddEmployee(),
-    MyCalendar(),
+    const EmployeeList(),
+    const AddEmployee(),
+    const MyCalendar(),
   ];
   static const List<Widget> itemsWeb = [
     EmployeeList(),

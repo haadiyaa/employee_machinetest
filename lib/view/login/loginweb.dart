@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:machinetest_web/controller/authcontroller.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/mytextstyles.dart';
-import 'package:machinetest_web/resources/strings.dart';
 import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
@@ -78,10 +77,10 @@ class LoginWeb extends GetWidget<AuthController> {
                             }
                           },
                         ),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Get.offAll(() => SignUp());
+                            Get.offAll(() => const SignUp());
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,

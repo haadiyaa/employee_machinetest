@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/appclass.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
-import 'package:machinetest_web/utils/employeelist.dart';
 
 class MyBox extends StatelessWidget {
   const MyBox({super.key, required this.index});

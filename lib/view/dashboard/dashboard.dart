@@ -9,7 +9,7 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
+    return const ResponsiveLayout(
         mobileView: DashBoardMobile(),
         tabletView:DashBoardTab() ,
         desktopView: DashboardWeb(),

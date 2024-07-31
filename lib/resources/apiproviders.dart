@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/secrets.dart';
@@ -15,7 +14,6 @@ class ApiProviders {
       var json = response.body;
       return EmployeeModel.fromJson(jsonDecode(json));
     } else {
-      print('Error response ${response.body}');
       return null;
     }
   }
@@ -32,10 +30,8 @@ class ApiProviders {
       },
     );
     if (response.statusCode == 200) {
-      print(response.body);
       return response;
     } else {
-      print('Error creating employee');
       return null;
     }
   }
@@ -44,12 +40,9 @@ class ApiProviders {
   static Future<http.Response?> deleteEmployee(String id) async {
     var response = await http
         .delete(Uri.parse('${Secrets.baseUrl}${Secrets.deleteEmployee}$id'));
-    print(response.statusCode);
     if (response.statusCode == 200) {
-      print(response.body);
       return response;
     } else {
-      print('null');
       return null;
     }
   }
@@ -67,7 +60,6 @@ class ApiProviders {
     if (response.statusCode == 200) {
       return response;
     } else {
-      print('null ${response.statusCode}');
       return null;
     }
   }

@@ -6,8 +6,6 @@ import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
 import 'package:machinetest_web/view/login/login.dart';
-import 'package:machinetest_web/view/signup/signup.dart';
-
 import '../../controller/authcontroller.dart';
 
 class SignUpTab extends GetWidget<AuthController> {

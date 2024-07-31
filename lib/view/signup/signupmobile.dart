@@ -7,7 +7,6 @@ import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mybutton.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
 import 'package:machinetest_web/view/login/login.dart';
-import 'package:machinetest_web/view/signup/signup.dart';
 
 class SignUpMobile extends GetWidget<AuthController> {
   SignUpMobile({super.key});
@@ -89,10 +88,10 @@ class SignUpMobile extends GetWidget<AuthController> {
                               }
                             },
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              Get.offAll(() => Login());
+                              Get.offAll(() => const Login());
                             },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,

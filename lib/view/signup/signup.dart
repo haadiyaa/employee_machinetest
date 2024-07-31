@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:machinetest_web/resources/responsive_layout.dart';
 import 'package:machinetest_web/view/signup/signupmobile.dart';

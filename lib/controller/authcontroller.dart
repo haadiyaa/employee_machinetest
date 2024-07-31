@@ -36,7 +36,7 @@ class AuthController extends GetxController {
         'name': name,
         'email': email,
       });
-      Get.offAll(() => Login());
+      Get.offAll(() => const Login());
 
       loading.value = false;
     } catch (e) {

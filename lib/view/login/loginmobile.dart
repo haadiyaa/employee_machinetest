@@ -76,10 +76,10 @@ class LoginMobile extends GetWidget<AuthController> {
                               }
                             },
                           ),
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              Get.offAll(() => SignUp());
+                              Get.offAll(() => const SignUp());
                             },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
