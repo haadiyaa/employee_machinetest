@@ -8,7 +8,8 @@ import 'package:machinetest_web/resources/validators.dart';
 import 'package:machinetest_web/utils/mytextfield.dart';
 
 class EmployeeProfileAlert extends GetWidget<EmployeeController> {
-  const EmployeeProfileAlert( {required this.id,
+  const EmployeeProfileAlert({
+    required this.id,
     super.key,
     required this.enabled,
     required this.name,
@@ -81,22 +82,37 @@ class EmployeeProfileAlert extends GetWidget<EmployeeController> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
             ),
-            child: controller.isLoading.value?CircularProgressIndicator(color: AppColors.white,): const Text('Delete'),
-            onPressed: ()async {
-              await controller.delete(id).then((value) => Get.back(),);
+            child: controller.isLoading.value
+                ? CircularProgressIndicator(
+                    color: AppColors.white,
+                  )
+                : const Text('Delete'),
+            onPressed: () async {
+              await controller.delete(id);
             },
           );
         }),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 10,
-            foregroundColor: AppColors.bgColor,
-            backgroundColor: Colors.green,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          ),
-          child: const Text('Update'),
-          onPressed: () {},
+        Obx(
+          () {
+            return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 10,
+                foregroundColor: AppColors.bgColor,
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              child: controller.isLoading.value
+                  ? CircularProgressIndicator(
+                      color: AppColors.white,
+                    )
+                  : const Text('Update'),
+              onPressed: () async {
+                await controller.updateEmp(
+                    id, name.text.trim(), age.text.trim(), salary.text.trim());
+              },
+            );
+          },
         ),
       ],
     );

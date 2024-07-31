@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:machinetest_web/controller/authcontroller.dart';
+import 'package:machinetest_web/controller/employeecontroller.dart';
 import 'package:machinetest_web/firebase_options.dart';
 import 'package:machinetest_web/resources/appcolors.dart';
 import 'package:machinetest_web/resources/instancebinding.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(AuthController());
+  Get.put(EmployeeController());
   runApp(const MyApp());
 }
 

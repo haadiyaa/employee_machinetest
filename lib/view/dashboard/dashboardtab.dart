@@ -33,10 +33,6 @@ class DashBoardTab extends GetWidget<AuthController> {
               leading: Icon(Icons.category_outlined),
               title: Text('Dashboard'),
             ),
-            const ListTile(
-              leading: Icon(Icons.group),
-              title: Text('Employees'),
-            ),
             ListTile(
               onTap: () {
                 controller.signOut();

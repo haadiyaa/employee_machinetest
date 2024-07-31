@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:machinetest_web/model/employeemodel.dart';
 import 'package:machinetest_web/resources/apiproviders.dart';
 
@@ -18,9 +20,40 @@ class EmployeeController extends GetxController {
       if (emoloyees != null) {
         employeeModel.value = emoloyees;
         print(employeeModel);
+      } else {
+        Get.dialog(
+          AlertDialog(
+            content: const Text('Error fetching employee details'),
+            actions: [
+              ElevatedButton.icon(
+                onPressed: () async {
+                  fetchAllEmployees();
+                  Get.back(closeOverlays: true);
+                },
+                label: const Text('Reload'),
+                icon: const Icon(Icons.replay_outlined),
+              ),
+            ],
+          ),
+        );
       }
     } catch (e) {
       print(e.toString());
+      Get.dialog(
+        AlertDialog(
+          content: const Text('Error fetching employee details'),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () async {
+                fetchAllEmployees();
+                Get.back(closeOverlays: true);
+              },
+              label: const Text('Reload'),
+              icon: const Icon(Icons.replay_outlined),
+            ),
+          ],
+        ),
+      );
       Get.snackbar("Error getting data. Please try again", e.toString());
     } finally {
       isLoading.value = false;
@@ -32,14 +65,45 @@ class EmployeeController extends GetxController {
     try {
       var create = await ApiProviders.createEmployee(name, age, salary);
       if (create != null) {
-        if (create.isEmpty) {
-          Get.snackbar("Added Successfully", "success");
-        }
-        Get.back();
+        Get.snackbar("Added Successfully", "success");
+
+        Get.back(closeOverlays: true);
       } else {
         Get.snackbar("Something went wrong!", "Plase try again");
+        Get.dialog(
+          AlertDialog(
+            content: const Text('Error Adding employee details'),
+            actions: [
+              ElevatedButton.icon(
+                onPressed: () async {
+                  await createEmployee(name, age, salary).then(
+                    (value) => Get.back(closeOverlays: true),
+                  );
+                },
+                label: const Text('Reload'),
+                icon: const Icon(Icons.replay_outlined),
+              ),
+            ],
+          ),
+        );
       }
     } catch (e) {
+      Get.dialog(
+        AlertDialog(
+          content: Text('Error Adding employee details : ${e.toString()}'),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () async {
+                await createEmployee(name, age, salary).then(
+                  (value) => Get.back(closeOverlays: true),
+                );
+              },
+              label: const Text('Reload'),
+              icon: const Icon(Icons.replay_outlined),
+            ),
+          ],
+        ),
+      );
       print(e.toString());
       Get.snackbar("Error adding employee", e.toString());
     } finally {
@@ -54,35 +118,96 @@ class EmployeeController extends GetxController {
       final del = await ApiProviders.deleteEmployee(id);
       if (del != null) {
         print('object1');
-        Get.snackbar('Deletion Successful!', 'Employee deleted Id; $id');
-        
+        Get.snackbar('Deletion Successful!', 'Employee deleted');
+        Get.back(closeOverlays: true);
       } else {
         print('object3');
         Get.snackbar('Error deleting employee details', 'Plase try again');
+        Get.dialog(
+          AlertDialog(
+            content: Text('Error Deleting employee details'),
+            actions: [
+              ElevatedButton.icon(
+                onPressed: () async {
+                  await delete(id).then(
+                    (value) => Get.back(closeOverlays: true),
+                  );
+                },
+                label: const Text('Reload'),
+                icon: const Icon(Icons.replay_outlined),
+              ),
+            ],
+          ),
+        );
       }
     } catch (e) {
       print('object4');
       Get.snackbar('Error deleting details!', e.toString());
+      Get.dialog(
+        AlertDialog(
+          content: Text('Error deleting employee details : ${e.toString()}'),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () async {
+                await delete(id).then(
+                  (value) => Get.back(closeOverlays: true),
+                );
+              },
+              label: const Text('Reload'),
+              icon: const Icon(Icons.replay_outlined),
+            ),
+          ],
+        ),
+      );
     } finally {
       isLoading.value = false;
     }
   }
 
-  Future<void> updateEmp(String id,String name,String age,String salary) async {
+  Future<void> updateEmp(
+      String id, String name, String age, String salary) async {
     isLoading.value = true;
     print('object');
     try {
-      final update = await ApiProviders.updateEmployee(id,name,age,salary);
+      final update = await ApiProviders.updateEmployee(id, name, age, salary);
       if (update != null) {
         print('object1');
         Get.snackbar('Updation Successful!', 'Employee Updated Id; $id');
-        
+        Get.back(closeOverlays: true);
       } else {
         print('object3');
+        Get.dialog(
+          AlertDialog(
+            content: const Text('Error updating employee details'),
+            actions: [
+              ElevatedButton.icon(
+                onPressed: () async {
+                  await updateEmp(id, name, age, salary);
+                },
+                label: const Text('Reload'),
+                icon: const Icon(Icons.replay_outlined),
+              ),
+            ],
+          ),
+        );
         Get.snackbar('Error updating employee details', 'Plase try again');
       }
     } catch (e) {
       print('object4');
+      Get.dialog(
+        AlertDialog(
+          content: const Text('Error updating employee details'),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () async {
+                await updateEmp(id, name, age, salary);
+              },
+              label: const Text('Reload'),
+              icon: const Icon(Icons.replay_outlined),
+            ),
+          ],
+        ),
+      );
       Get.snackbar('Error updating details!', e.toString());
     } finally {
       isLoading.value = false;

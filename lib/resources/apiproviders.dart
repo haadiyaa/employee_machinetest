@@ -14,11 +14,11 @@ class ApiProviders {
       return EmployeeModel.fromJson(jsonDecode(json));
     } else {
       print('Error response ${response.body}');
+      return null;
     }
-    return null;
   }
 
-  static Future<String?> createEmployee(
+  static Future<http.Response?> createEmployee(
       String name, String age, String salary) async {
     var response = await http.post(
       Uri.parse('${Secrets.baseUrl}${Secrets.createEmployee}'),
@@ -30,39 +30,40 @@ class ApiProviders {
     );
     if (response.statusCode == 200) {
       print(response.body);
-      return '';
+      return response;
     } else {
       print('Error creating employee');
+      return null;
     }
-    return null;
   }
 
-  static Future<http.Response?> deleteEmployee(String id)async{
-    var response= await http.delete(Uri.parse('${Secrets.baseUrl}${Secrets.deleteEmployee}$id'));
+  static Future<http.Response?> deleteEmployee(String id) async {
+    var response = await http
+        .delete(Uri.parse('${Secrets.baseUrl}${Secrets.deleteEmployee}$id'));
     print(response.statusCode);
-    if (response.statusCode==200) {
+    if (response.statusCode == 200) {
       print(response.body);
       return response;
-      // Get.snackbar('Deletion Successful!', 'Employee deleted Id; $id');
     } else {
       print('null');
       return null;
-      // Get.snackbar('Error deleting employee details', 'Plase try again');
     }
   }
-  static Future<http.Response?> updateEmployee(String id, String name, String age, String salary)async{
-    var response=await http.put(Uri.parse('${Secrets.baseUrl}${Secrets.updateEmployee}$id'),
-    body: {
-      "name":name,
-      "age":age,
-      "salary":salary,
-    });
-    if (response.statusCode==200) {
+
+  static Future<http.Response?> updateEmployee(
+      String id, String name, String age, String salary) async {
+    var response = await http.put(
+        Uri.parse('${Secrets.baseUrl}${Secrets.updateEmployee}$id'),
+        body: {
+          "name": name,
+          "age": age,
+          "salary": salary,
+        });
+    if (response.statusCode == 200) {
       return response;
     } else {
       print('null ${response.statusCode}');
       return null;
-      
     }
   }
 }

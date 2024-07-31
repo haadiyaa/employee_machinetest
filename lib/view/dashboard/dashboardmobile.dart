@@ -29,18 +29,10 @@ class DashBoardMobile extends GetWidget<AuthController> {
                 image: AssetImage(Strings.logo),
                 width: 200,
               ),
-              // child: Icon(
-              //   Icons.person,
-              //   size: 50,
-              // ),
             ),
             const ListTile(
               leading: Icon(Icons.category_outlined),
               title: Text('Dashboard'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.group),
-              title: Text('Employees'),
             ),
             ListTile(
               onTap: () {
